@@ -39,10 +39,17 @@ jobs:
       - name: set PATH, check mingw version, cmake generate, build and install
         shell: msys2 {0}
         run: |
-            export PATH="${{ github.workspace }}/mingw64:${{ github.workspace }}/mingw64/bin:${{ github.workspace }}/cmake-3.24.0-windows-x86_64/bin:${{ github.workspace }}/msys64/usr/bin:/usr/bin" &&
-            cd openssl && g++ --version && ./Configure mingw64 -static --prefix="$(pwd)/${{ env.installationPath }}" &&
+            workspace=$(pwd) &&
+            export PATH="$workspace/mingw64:$workspace/mingw64/bin:$workspace/msys64/usr/bin:/usr/bin" &&
+            cd openssl && 
+            g++ --version && 
+            ./configure mingw64 -static --prefix="$(pwd)/${{ env.installationPath }}" &&
             mingw32-make.exe install_sw
             
+      - name: copy customized openssl-config.cmake
+        shell: cmd
+        run: cd /d "${{github.workspace}}" && xcopy /H /Y /C "openssl-config.cmake" "openssl\${{ env.installationPath }}"
+        
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
