@@ -1,3 +1,8 @@
+set(OPENSSL_VERSION 3.0.5)
+set(OPENSSL_VERSION_MAJOR 3)
+set(OPENSSL_VERSION_MINOR 0)
+set(OPENSSL_VERSION_PATCH 5)
+
 find_path(OPENSSL_INCLUDE_DIR
           NAMES openssl/ssl.h
           PATH_SUFFIXES include
