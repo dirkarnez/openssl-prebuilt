@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Create Release
-    runs-on: windows-2019
+    runs-on: windows-latest
     env:
       libraryName: openssl
       installationPath: openssl-installation
@@ -17,11 +17,14 @@ jobs:
       mingwTargetZip: openssl-${{ github.ref_name }}-mingw64-x86_64-posix-seh-rev0-8.1.0.zip
     steps:
       - uses: actions/checkout@v3
-      
-      - name: git clone
-        shell: cmd
-        run: git clone --recursive https://github.com/openssl/openssl.git && cd openssl && git checkout ${{ env.tagName }}
-      
+
+      - uses: actions/checkout@v3
+        with:
+          repository: openssl/openssl
+          path: openssl
+          ref: ${{ env.tagName }}
+          submodules: true
+          
       - name: Install MSYS2
         uses: msys2/setup-msys2@v2
         with:
