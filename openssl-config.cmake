@@ -28,6 +28,9 @@ set(OPENSSL_CRYPTO_LIBRARIES ${OPENSSL_CRYPTO_LIBRARY})
 set(OPENSSL_LIBRARIES ${OPENSSL_SSL_LIBRARIES} ${OPENSSL_CRYPTO_LIBRARIES} )
 set(OPENSSL_FOUND TRUE)
 
+set(OpenSSL_Crypto_FOUND TRUE)
+set(OpenSSL_SSL_FOUND TRUE)
+
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(OpenSSL
                             REQUIRED_VARS
