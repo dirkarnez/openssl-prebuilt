@@ -51,7 +51,11 @@ jobs:
             
       - name: copy customized openssl-config.cmake
         shell: cmd
-        run: cd /d "${{github.workspace}}" && xcopy /H /Y /C "openssl-config.cmake" "openssl\${{ env.installationPath }}"
+        run: xcopy /H /Y /C "openssl-config.cmake" "openssl\${{ env.installationPath }}"
+        
+      - name: copy customized openssl-config.cmake
+        shell: cmd
+        run: xcopy /H /Y /C "openssl-config-version.cmake" "openssl\${{ env.installationPath }}"
         
       - name: Archive Release
         uses: thedoctor0/zip-release@master
