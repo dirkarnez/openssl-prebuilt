@@ -13,8 +13,8 @@ jobs:
     env:
       libraryName: openssl
       installationPath: openssl-installation
-      tagName: openssl-3.0.5 # target tag
-      mingwTargetZip: openssl-${{ github.ref_name }}-mingw64-x86_64-posix-seh-rev0-8.1.0.zip
+      tagName: v3.1.3 # target tag
+      mingwTargetZip: openssl-${{ github.ref_name }}-x86_64-8.1.0-release-posix-seh-rt_v6-rev0.zip
     steps:
       - uses: actions/checkout@v3
 
@@ -61,12 +61,12 @@ jobs:
         uses: thedoctor0/zip-release@master
         with:
           type: 'zip'
-          directory: "${{ github.workspace }}/openssl/${{ env.installationPath }}"
+          directory: "openssl/${{ env.installationPath }}"
           filename: "${{ env.mingwTargetZip }}"
         
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "${{ github.workspace }}/openssl/${{ env.installationPath }}/${{ env.mingwTargetZip }}"
+          artifacts: "openssl/${{ env.installationPath }}/${{ env.mingwTargetZip }}"
           allowUpdates: true
           token: ${{ secrets.GITHUB_TOKEN }}
