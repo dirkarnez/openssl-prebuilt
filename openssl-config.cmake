@@ -36,7 +36,7 @@ include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(OpenSSL
                             REQUIRED_VARS
                                 OPENSSL_CRYPTO_LIBRARY
-                                OPENSSL_INCLUDE_DIR
+                                OPENSSL_INCLUDE_DIRS
                             VERSION_VAR
                               OPENSSL_VERSION
                             HANDLE_VERSION_RANGE
@@ -46,7 +46,7 @@ find_package_handle_standard_args(OpenSSL
 
 add_library(OpenSSL::Crypto UNKNOWN IMPORTED)
 set_target_properties(OpenSSL::Crypto PROPERTIES
-                    INTERFACE_INCLUDE_DIRECTORIES "${OPENSSL_INCLUDE_DIR}")       
+                    INTERFACE_INCLUDE_DIRECTORIES "${OPENSSL_INCLUDE_DIRS}")       
 set_target_properties(OpenSSL::Crypto PROPERTIES
                     IMPORTED_LINK_INTERFACE_LANGUAGES "C"
                     IMPORTED_LOCATION "${OPENSSL_CRYPTO_LIBRARIES}")
@@ -56,7 +56,7 @@ set_property( TARGET OpenSSL::Crypto APPEND PROPERTY INTERFACE_LINK_LIBRARIES cr
         
 add_library(OpenSSL::SSL UNKNOWN IMPORTED)
 set_target_properties(OpenSSL::SSL PROPERTIES
-          INTERFACE_INCLUDE_DIRECTORIES "${OPENSSL_INCLUDE_DIR}")
+          INTERFACE_INCLUDE_DIRECTORIES "${OPENSSL_INCLUDE_DIRS}")
 set_target_properties(OpenSSL::SSL PROPERTIES
             IMPORTED_LINK_INTERFACE_LANGUAGES "C"
             IMPORTED_LOCATION "${OPENSSL_SSL_LIBRARIES}")
